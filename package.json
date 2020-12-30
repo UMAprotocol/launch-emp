@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "yarn run prettier --list-different",
     "lint-fix": "yarn run prettier --write",
-    "prettier": "prettier './**/*.js' './**/*.md'"
+    "prettier": "prettier './**/*.js' './**/*.md'",
+    "ganache-fork": "yarn ganache-cli -l 12000000 --fork"
   },
   "author": "UMA Team",
   "license": "AGPL-3.0",
@@ -15,7 +16,7 @@
     "url": "https://github.com/UMAprotocol/launch-emp.git"
   },
   "devDependencies": {
-    "ganache-cli": "^6.12.1",
+    "ganache-cli": "6.11.0",
     "prettier": "^2.2.1"
   },
   "dependencies": {
