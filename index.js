@@ -32,7 +32,7 @@ if (argv.gasprice < 1 || argv.gasprice > 1000) throw "--gasprice must be between
   // Example EMP Parameters. Customize these.
   const empParams = {
     expirationTimestamp: "1640995200", // 01/01/2022 @ 0:00 (UTC)
-    collateralAddress: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2", // WETH
+    collateralAddress: "0xd0a1e359811322d97991e03f863a0c30c2cf029c", // Kovan WETH address
     priceFeedIdentifier: padRight(utf8ToHex("USDETH"), 64), // Using the USDETH price.
     syntheticName: "uUSDwETH Synthetic Token Expiring 1 January 2022", // Long name.
     syntheticSymbol: "uUSDwETH-JAN", // Short name.
@@ -43,7 +43,7 @@ if (argv.gasprice < 1 || argv.gasprice > 1000) throw "--gasprice must be between
     minSponsorTokens: { rawValue: toWei("100") }, // Min sponsor position size of 100 synthetic tokens.
     liquidationLiveness: 7200, // 2 hour liquidation liveness.
     withdrawalLiveness: 7200, // 2 hour withdrawal liveness.
-    excessTokenBeneficiary: "0x54f44eA3D2e7aA0ac089c4d8F7C93C27844057BF", // UMA Store contract.
+    excessTokenBeneficiary: "0x41AF40Eb92Bec4dD8DA77103597838b3dBBD3B6f", // UMA Kovan Store contract.
   };
 
   const accounts = await web3.eth.getAccounts();
