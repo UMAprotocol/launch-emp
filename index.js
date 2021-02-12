@@ -43,9 +43,9 @@ if (argv.gasprice < 1 || argv.gasprice > 1000) throw "--gasprice must be between
     syntheticName: "uUSDwETH Synthetic Token Expiring 1 January 2022", // Long name.
     syntheticSymbol: "uUSDwETH-JAN", // Short name.
     collateralRequirement: { rawValue: toWei("1.25") }, // 125% collateral req.
-    disputeBondPct: { rawValue: toWei("0.1") }, // 10% dispute bond.
-    sponsorDisputeRewardPct: { rawValue: toWei("0.05") }, // 5% reward for sponsors who are disputed invalidly
-    disputerDisputeRewardPct: { rawValue: toWei("0.2") }, // 20% reward for correct disputes.
+    disputeBondPercentage: { rawValue: toWei("0.1") }, // 10% dispute bond.
+    sponsorDisputeRewardPercentage: { rawValue: toWei("0.05") }, // 5% reward for sponsors who are disputed invalidly
+    disputerDisputeRewardPercentage: { rawValue: toWei("0.2") }, // 20% reward for correct disputes.
     minSponsorTokens: { rawValue: toWei("100") }, // Min sponsor position size of 100 synthetic tokens.
     liquidationLiveness: 7200, // 2 hour liquidation liveness.
     withdrawalLiveness: 7200, // 2 hour withdrawal liveness.
