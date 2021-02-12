@@ -49,7 +49,7 @@ if (argv.gasprice < 1 || argv.gasprice > 1000) throw "--gasprice must be between
     minSponsorTokens: { rawValue: toWei("100") }, // Min sponsor position size of 100 synthetic tokens.
     liquidationLiveness: 7200, // 2 hour liquidation liveness.
     withdrawalLiveness: 7200, // 2 hour withdrawal liveness.
-    excessTokenBeneficiary:  getAddress("Store", networkId), // UMA Store contract.
+    financialProductLibraryAddress:  getAddress("ExpiringMultiPartyLib", networkId), // ExpiringMultiParty library contract.
   };
 
   const empCreator = new web3.eth.Contract(
@@ -72,6 +72,7 @@ if (argv.gasprice < 1 || argv.gasprice > 1000) throw "--gasprice must be between
   // Since the simulated transaction succeeded, send the real one to the network.
   const { transactionHash } = await empCreator.methods.createExpiringMultiParty(empParams).send(transactionOptions);
   console.log("Deployed in transaction:", transactionHash);
+  process.exit(0);
 })().catch((e) => {
   console.error(e);
   process.exit(1); // Exit with a nonzero exit code to signal failure.
