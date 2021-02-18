@@ -38,7 +38,7 @@ if (argv.gasprice < 1 || argv.gasprice > 1000) throw "--gasprice must be between
   // Example EMP Parameters. Customize these.
   const empParams = {
     expirationTimestamp: "1640995200", // 01/01/2022 @ 0:00 (UTC)
-    collateralAddress: "0xd0a1e359811322d97991e03f863a0c30c2cf029c", // Kovan WETH address. Mainnet WETH is: 0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2.
+    collateralAddress: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2", // Kovan WETH address. Mainnet WETH is: 0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2.
     priceFeedIdentifier: padRight(utf8ToHex("USDETH"), 64), // Using the USDETH price.
     syntheticName: "uUSDwETH Synthetic Token Expiring 1 January 2022", // Long name.
     syntheticSymbol: "uUSDwETH-JAN", // Short name.
