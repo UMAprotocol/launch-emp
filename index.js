@@ -6,7 +6,7 @@ const { getAbi, getAddress } = require("@uma/core");
 // --url: node url, by default points at http://localhost:8545.
 // --mnemonic: an account mnemonic you'd like to use. The script will default to using the node's unlocked accounts.
 const argv = require("minimist")(process.argv.slice(), {
-  string: ["url", "mnemonic"],
+  string: ["url", "mnemonic", "libraryAddress"],
 });
 if (!argv.gasprice) throw "--gasprice required (in GWEI)";
 if (typeof argv.gasprice !== "number") throw "--gasprice must be a number";
@@ -49,7 +49,7 @@ if (argv.gasprice < 1 || argv.gasprice > 1000) throw "--gasprice must be between
     minSponsorTokens: { rawValue: toWei("100") }, // Min sponsor position size of 100 synthetic tokens.
     liquidationLiveness: 7200, // 2 hour liquidation liveness.
     withdrawalLiveness: 7200, // 2 hour withdrawal liveness.
-    financialProductLibraryAddress:  getAddress("ExpiringMultiPartyLib", networkId), // ExpiringMultiParty library contract.
+    financialProductLibraryAddress:  argv.libraryAddress ? argv.libraryAddress : "0x0000000000000000000000000000000000000000", // Default to 0x0 if no address is passed.
   };
 
   const empCreator = new web3.eth.Contract(
