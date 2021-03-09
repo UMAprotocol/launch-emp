@@ -67,14 +67,16 @@ const libraryAddress = argv.libraryAddress ? argv.libraryAddress : "0x0000000000
     priceFeedIdentifier: padRight(utf8ToHex(argv.priceFeedIdentifier.toString()), 64), // Price identifier to use.
     syntheticName: argv.syntheticName, // Long name.
     syntheticSymbol: argv.syntheticSymbol, // Short name.
-    collateralRequirement: { rawValue: toWei("1.25") }, // 125% collateral req.
+    
+    collateralRequirement: { rawValue: toWei("1") }, // 100% collateral req is possible because position is always backed by 1 unit of colateral, as 
+                                                     // before expiry, as defined in the financialProductLibrary
     disputeBondPercentage: { rawValue: toWei("0.1") }, // 10% dispute bond.
-    sponsorDisputeRewardPercentage: { rawValue: toWei("0.05") }, // 5% reward for sponsors who are disputed invalidly
-    disputerDisputeRewardPercentage: { rawValue: toWei("0.2") }, // 20% reward for correct disputes.
+    sponsorDisputeRewardPercentage: { rawValue: toWei("1") }, // 100% reward for sponsors who are disputed invalidly (sponsors should never be disputed)
+    disputerDisputeRewardPercentage: { rawValue: toWei("0.2") }, // 0% reward for correct disputes (disputes should always be wrong).
     minSponsorTokens: { rawValue: parseFixed(argv.minSponsorTokens.toString(), decimals) }, // Minimum sponsor position size.
-    liquidationLiveness: 7200, // 2 hour liquidation liveness.
-    withdrawalLiveness: 7200, // 2 hour withdrawal liveness.
-    financialProductLibraryAddress: libraryAddress, // Default to 0x0 if no address is passed.
+    liquidationLiveness: 5184000, // 60 day liquidation liveness.
+    withdrawalLiveness: 5184000, // 60 day withdrawal liveness.
+    financialProductLibraryAddress: libraryAddress, // this is required for covered calls
   };
 
   const empCreator = new web3.eth.Contract(
