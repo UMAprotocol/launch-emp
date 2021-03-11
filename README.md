@@ -12,7 +12,7 @@ Note: these additional dependencies are required -- you may or may not have them
 - `libudev`
 - `libusb`
 
-Example ubuntu installation command for additional deps:
+These dependencies are installed on MacOSX by installing the XCode Developer Tools. For Linux, the example ubuntu installation command for additional deps is:
 
 ```bash
 sudo apt-get update && sudo apt-get install -y libudev-dev libusb-1.0-0-dev
