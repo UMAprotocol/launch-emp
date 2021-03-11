@@ -72,7 +72,7 @@ const libraryAddress = argv.libraryAddress ? argv.libraryAddress : "0x0000000000
                                                      // before expiry, as defined in the financialProductLibrary
     disputeBondPercentage: { rawValue: toWei("0.1") }, // 10% dispute bond.
     sponsorDisputeRewardPercentage: { rawValue: toWei("1") }, // 100% reward for sponsors who are disputed invalidly (sponsors should never be disputed)
-    disputerDisputeRewardPercentage: { rawValue: toWei("0.2") }, // 0% reward for correct disputes (disputes should always be wrong).
+    disputerDisputeRewardPercentage: { rawValue: "0" }, // 0% reward for correct disputes (disputes should always be right).
     minSponsorTokens: { rawValue: parseFixed(argv.minSponsorTokens.toString(), decimals) }, // Minimum sponsor position size.
     liquidationLiveness: 5184000, // 60 day liquidation liveness.
     withdrawalLiveness: 5184000, // 60 day withdrawal liveness.
