@@ -31,6 +31,8 @@ deployment in a forked environment and interact with it to ensure it works as ex
 
 Start ganache.
 
+EDIT to eng: What's your.node.url.io? We need to spell this out in more detail. We should also have a link to Ganache and a one sentence explaination about what it is.
+
 ```bash
 yarn ganache-fork your.node.url.io
 ```
