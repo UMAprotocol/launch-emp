@@ -68,7 +68,7 @@ const libraryAddress = argv.libraryAddress ? argv.libraryAddress : "0x0000000000
     syntheticName: argv.syntheticName, // Long name.
     syntheticSymbol: argv.syntheticSymbol, // Short name.
     
-    collateralRequirement: { rawValue: toWei("1") }, // 100% collateral req is possible because position is always backed by 1 unit of colateral, as 
+    collateralRequirement: { rawValue: web3.utils.toBN(toWei("1")).addn(1).toString() }, // 100% collateral req is possible because position is always backed by 1 unit of colateral, as 
                                                      // before expiry, as defined in the financialProductLibrary
     disputeBondPercentage: { rawValue: toWei("0.1") }, // 10% dispute bond.
     sponsorDisputeRewardPercentage: { rawValue: toWei("0.99999") }, // 100% reward for sponsors who are disputed invalidly (sponsors should never be disputed)
