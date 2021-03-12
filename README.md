@@ -26,8 +26,7 @@ yarn
 
 ## Run the deployment script on a mainnet fork
 
-It's a good idea to try out your deployment on a fork before running it on mainnet. This will allow you to run the
-deployment in a forked environment and interact with it to ensure it works as expected.
+It's a good idea to try out your deployment on a fork before running it on mainnet. This will allow you to run the deployment in a forked environment and interact with it to ensure it works as expected. To do this, you will use [Gananche](https://www.trufflesuite.com/ganache), a tool that allows for the creation of local Ethereum test networks. 
 
 Start ganache.
 
@@ -53,4 +52,4 @@ node index.js --gasprice 50 --url YOUR_NODE_URL --mnemonic "your mnemonic (12 wo
 
 ## Customize your deployment parameters
 
-It is recommended to keep the default empParams struct and only customize your construction parameters by passing in the listed mandatory args. See [the script](./index.js) or this [documentation](https://docs.umaproject.org/build-walkthrough/emp-parameters) for more details.
+It is recommended to keep the default empParams struct and only customize your construction parameters by passing in the listed mandatory args. See [the script](./index.js) or [documentation](https://docs.umaproject.org/build-walkthrough/emp-parameters) for more details.
