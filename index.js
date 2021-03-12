@@ -27,7 +27,7 @@ if (!argv.minSponsorTokens) throw "--minSponsorTokens required";
 if (!argv.gasprice) throw "--gasprice required (in GWEI)";
 if (typeof argv.gasprice !== "number") throw "--gasprice must be a number";
 if (argv.gasprice < 1 || argv.gasprice > 1000) throw "--gasprice must be between 1 and 1000 (GWEI)";
-const libraryAddress = argv.libraryAddress ? argv.libraryAddress : "0x0000000000000000000000000000000000000000";
+const libraryAddress = argv.libraryAddress ? argv.libraryAddress : "0xb0A395D8F3ae483d757EC1c83eFFc61DF96eCfa4";
 
 // Wrap everything in an async function to allow the use of async/await.
 (async () => {
