@@ -26,7 +26,9 @@ yarn
 
 ## Run the deployment script on a mainnet fork
 
-It's a good idea to try out your deployment on a fork before running it on mainnet. This will allow you to run the deployment in a forked environment and interact with it to ensure it works as expected. To do this, you will use [Gananche](https://www.trufflesuite.com/ganache), a tool that allows for the creation of local Ethereum test networks. 
+It's a good idea to try out your deployment on a fork before running it on mainnet. This will allow you to run the deployment in a forked environment and interact with it to ensure it works as expected. To do this, you will use [Gananche](https://www.trufflesuite.com/ganache), a tool that allows for the creation of local Ethereum test networks.
+
+You should replace `YOUR_NODE_URL` with the URL of whatever Kovan or mainnet Ethereum node that you wish to use. [Infura](https://infura.io/product/ethereum) provides easy access to Ethereum and is one method that you could use to get your node URL.
 
 Start ganache.
 
