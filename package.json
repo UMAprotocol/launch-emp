@@ -16,7 +16,7 @@
     "url": "https://github.com/UMAprotocol/launch-emp.git"
   },
   "devDependencies": {
-    "ganache-cli": "6.11.0",
+    "ganache-cli": "6.12.0",
     "prettier": "^2.2.1"
   },
   "dependencies": {
