@@ -27,7 +27,7 @@ if (!argv.minSponsorTokens) throw "--minSponsorTokens required";
 if (!argv.gasprice) throw "--gasprice required (in GWEI)";
 if (typeof argv.gasprice !== "number") throw "--gasprice must be a number";
 if (argv.gasprice < 1 || argv.gasprice > 1000) throw "--gasprice must be between 1 and 1000 (GWEI)";
-const libraryAddress = argv.libraryAddress ? argv.libraryAddress : "0xb0A395D8F3ae483d757EC1c83eFFc61DF96eCfa4";
+const libraryAddress = argv.libraryAddress ? argv.libraryAddress : "0x903Fa079B93D2Bb222eaFCF1F59d0A9b628D354a";
 
 // Wrap everything in an async function to allow the use of async/await.
 (async () => {
@@ -71,11 +71,11 @@ const libraryAddress = argv.libraryAddress ? argv.libraryAddress : "0xb0A395D8F3
     collateralRequirement: { rawValue: web3.utils.toBN(toWei("1")).addn(1).toString() }, // 100% collateral req is possible because position is always backed by 1 unit of colateral, as 
                                                      // before expiry, as defined in the financialProductLibrary
     disputeBondPercentage: { rawValue: toWei("0.1") }, // 10% dispute bond.
-    sponsorDisputeRewardPercentage: { rawValue: toWei("0.99999") }, // 100% reward for sponsors who are disputed invalidly (sponsors should never be disputed)
+    sponsorDisputeRewardPercentage: { rawValue: toWei("0.99999") }, // 99.999% reward for sponsors who are disputed invalidly (sponsors should never be disputed)
     disputerDisputeRewardPercentage: { rawValue: "0" }, // 0% reward for correct disputes (disputes should always be right).
     minSponsorTokens: { rawValue: parseFixed(argv.minSponsorTokens.toString(), decimals) }, // Minimum sponsor position size.
-    liquidationLiveness: 5184000, // 60 day liquidation liveness.
-    withdrawalLiveness: 5184000, // 60 day withdrawal liveness.
+    liquidationLiveness: 8640000, // 100 day liquidation liveness.
+    withdrawalLiveness: 8640000, // 100 day withdrawal liveness.
     financialProductLibraryAddress: libraryAddress, // this is required for covered calls
   };
 
