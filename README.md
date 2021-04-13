@@ -1,7 +1,6 @@
 # Stub Package for Launching a New EMP
 
-The purpose of this repository/package is to make it easy to customize your EMP deployment. Feel free to use this
-repository in place or fork and customize it.
+The purpose of this repository/package is to make it easy to customize your covered call EMP deployment. Feel free to use this repository in place or fork and customize it.
 
 ## Install system dependencies
 
@@ -39,7 +38,7 @@ In a separate terminal, run the deployment script (it defaults to using localhos
 desired in this case). Note: mnemonic is optional here -- without it, ganache will use its default pre-loaded account.
 
 ```bash
-node index.js --gasprice 50 --mnemonic "your mnemonic (12 word seed phrase)" --priceFeedIdentifier USDETH --collateralAddress "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2" --expirationTimestamp "1643678287" --syntheticName "Yield Dollar [WETH Jan 2022]" --syntheticSymbol "YD-ETH-JAN22" --minSponsorTokens "100"
+node index.js --gasprice 160 --mnemonic "your mnemonic (12 word seed phrase)" --priceFeedIdentifier UNIUSD --collateralAddress "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984" --expirationTimestamp "1622498400" --syntheticName "UNI 45 Call [31 May 2021]" --syntheticSymbol "UNIc45-0531" --minSponsorTokens "25"
 ```
 
 Now you should be able to use `localhost:8545` to interact with a forked version of mainnet (or kovan) where your
@@ -48,13 +47,13 @@ contract is deployed.
 ## Run the deployment script on mainnet or kovan
 
 ```bash
-node index.js --gasprice 50 --url your.node.url.io --mnemonic "your mnemonic (12 word seed phrase)" --priceFeedIdentifier USDETH --collateralAddress "0xd0a1e359811322d97991e03f863a0c30c2cf029c" --expirationTimestamp "1643678287" --syntheticName "Yield Dollar [WETH Jan 2022]" --syntheticSymbol "YD-ETH-JAN22" --minSponsorTokens "100"
+node index.js --gasprice 160 --mnemonic "your mnemonic (12 word seed phrase)" --priceFeedIdentifier UNIUSD --collateralAddress "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984" --expirationTimestamp "1622498400" --syntheticName "UNI 45 Call [31 May 2021]" --syntheticSymbol "UNIc45-0531" --minSponsorTokens "25" --url "your node url"
 ```
 
 ## Customize the script
 
-The script should be fairly easy to read and understand. It is recommended to keep the default empParams 
-and customize your construction parameters by passing the listed mandatory args. See [the script](./index.js) 
+The script should be fairly easy to read and understand. It is recommended to keep the default `empParams`
+and customize your construction parameters by passing the listed mandatory args. See [the script](./index.js)
 for more details.
 
 We encourage you to fork this repo and customize the script as you see fit!

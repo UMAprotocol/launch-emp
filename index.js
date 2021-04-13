@@ -14,9 +14,11 @@ const { parseFixed } = require("@ethersproject/bignumber");
 // --syntheticName: long name.
 // --syntheticSymbol: short name.
 // --minSponsorTokens: minimum sponsor position size
+// --libraryAddress: covered call financial product library address
+// --liveness: liquidation and withdrawal liveness should be > (expiry timestamp - deploymenet timestamp)
 
 const argv = require("minimist")(process.argv.slice(), {
-  string: ["url", "mnemonic", "priceFeedIdentifier", "collateralAddress", "expirationTimestamp", "syntheticName", "syntheticSymbol", "minSponsorTokens", "libraryAddress"]
+  string: ["url", "mnemonic", "priceFeedIdentifier", "collateralAddress", "expirationTimestamp", "syntheticName", "syntheticSymbol", "minSponsorTokens", "libraryAddress", "liveness"]
 });
 if (!argv.priceFeedIdentifier) throw "--priceFeedIdentifier required";
 if (!argv.collateralAddress) throw "--collateralAddress required";
@@ -28,6 +30,7 @@ if (!argv.gasprice) throw "--gasprice required (in GWEI)";
 if (typeof argv.gasprice !== "number") throw "--gasprice must be a number";
 if (argv.gasprice < 1 || argv.gasprice > 1000) throw "--gasprice must be between 1 and 1000 (GWEI)";
 const libraryAddress = argv.libraryAddress ? argv.libraryAddress : "0xBbc6009fEfFc27ce705322832Cb2068F8C1e0A58";
+const liveness = argv.liveness ? argv.liveness : 5184000;
 
 // Wrap everything in an async function to allow the use of async/await.
 (async () => {
@@ -68,14 +71,14 @@ const libraryAddress = argv.libraryAddress ? argv.libraryAddress : "0xBbc6009fEf
     syntheticName: argv.syntheticName, // Long name.
     syntheticSymbol: argv.syntheticSymbol, // Short name.
 
-    collateralRequirement: { rawValue: web3.utils.toBN(toWei("1")).addn(1).toString() }, // 100% collateral req is possible because position is always backed by 1 unit of colateral, as
+    collateralRequirement: { rawValue: web3.utils.toBN(toWei("1")).addn(1).toString() }, // 100% collateral req is possible because position is always backed by 1 unit of collateral, as
                                                      // before expiry, as defined in the financialProductLibrary
     disputeBondPercentage: { rawValue: toWei("0.1") }, // 10% dispute bond.
     sponsorDisputeRewardPercentage: { rawValue: toWei("0.99999") }, // 100% reward for sponsors who are disputed invalidly (sponsors should never be disputed)
     disputerDisputeRewardPercentage: { rawValue: "0" }, // 0% reward for correct disputes (disputes should always be right).
     minSponsorTokens: { rawValue: parseFixed(argv.minSponsorTokens.toString(), decimals) }, // Minimum sponsor position size.
-    liquidationLiveness: 5184000, // 60 day liquidation liveness.
-    withdrawalLiveness: 5184000, // 60 day withdrawal liveness.
+    liquidationLiveness: liveness, // 60 day default liquidation liveness.
+    withdrawalLiveness: liveness, // 60 day default withdrawal liveness.
     financialProductLibraryAddress: libraryAddress, // this is required for covered calls
   };
 
@@ -92,9 +95,9 @@ const libraryAddress = argv.libraryAddress ? argv.libraryAddress : "0xBbc6009fEf
   };
 
   // Simulate transaction to test before sending to the network.
-  console.log("Simulating Deployment...");
-  const address = await empCreator.methods.createExpiringMultiParty(empParams).call(transactionOptions);
-  console.log("Simulation successful. Expected Address:", address);
+  // console.log("Simulating Deployment...");
+  // const address = await empCreator.methods.createExpiringMultiParty(empParams).call(transactionOptions);
+  // console.log("Simulation successful. Expected Address:", address);
 
   // Since the simulated transaction succeeded, send the real one to the network.
   const { transactionHash } = await empCreator.methods.createExpiringMultiParty(empParams).send(transactionOptions);
