@@ -27,7 +27,7 @@ if (!argv.minSponsorTokens) throw "--minSponsorTokens required";
 if (!argv.gasprice) throw "--gasprice required (in GWEI)";
 if (typeof argv.gasprice !== "number") throw "--gasprice must be a number";
 if (argv.gasprice < 1 || argv.gasprice > 1000) throw "--gasprice must be between 1 and 1000 (GWEI)";
-const libraryAddress = argv.libraryAddress ? argv.libraryAddress : "0xb0A395D8F3ae483d757EC1c83eFFc61DF96eCfa4";
+const libraryAddress = argv.libraryAddress ? argv.libraryAddress : "0xBbc6009fEfFc27ce705322832Cb2068F8C1e0A58";
 
 // Wrap everything in an async function to allow the use of async/await.
 (async () => {
@@ -67,8 +67,8 @@ const libraryAddress = argv.libraryAddress ? argv.libraryAddress : "0xb0A395D8F3
     priceFeedIdentifier: padRight(utf8ToHex(argv.priceFeedIdentifier.toString()), 64), // Price identifier to use.
     syntheticName: argv.syntheticName, // Long name.
     syntheticSymbol: argv.syntheticSymbol, // Short name.
-    
-    collateralRequirement: { rawValue: web3.utils.toBN(toWei("1")).addn(1).toString() }, // 100% collateral req is possible because position is always backed by 1 unit of colateral, as 
+
+    collateralRequirement: { rawValue: web3.utils.toBN(toWei("1")).addn(1).toString() }, // 100% collateral req is possible because position is always backed by 1 unit of colateral, as
                                                      // before expiry, as defined in the financialProductLibrary
     disputeBondPercentage: { rawValue: toWei("0.1") }, // 10% dispute bond.
     sponsorDisputeRewardPercentage: { rawValue: toWei("0.99999") }, // 100% reward for sponsors who are disputed invalidly (sponsors should never be disputed)
@@ -86,7 +86,7 @@ const libraryAddress = argv.libraryAddress ? argv.libraryAddress : "0xb0A395D8F3
 
   // Transaction parameters
   const transactionOptions = {
-    gas: 12000000, // 12MM is very high. Set this lower if you only have < 2 ETH or so in your wallet.
+    gas: 9000000, // 9MM is high. Set this lower if you only have < 2 ETH or so in your wallet.
     gasPrice: argv.gasprice * 1000000000, // gasprice arg * 1 GWEI
     from: account,
   };
