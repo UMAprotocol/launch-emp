@@ -29,7 +29,7 @@ if (!argv.minSponsorTokens) throw "--minSponsorTokens required";
 if (!argv.gasprice) throw "--gasprice required (in GWEI)";
 if (typeof argv.gasprice !== "number") throw "--gasprice must be a number";
 if (argv.gasprice < 1 || argv.gasprice > 1000) throw "--gasprice must be between 1 and 1000 (GWEI)";
-const libraryAddress = argv.libraryAddress ? argv.libraryAddress : "0xreplace";
+const libraryAddress = argv.libraryAddress ? argv.libraryAddress : "0xAb955711ECd766Ce70dc2DbF2D9e0E8e4b431232"; // post-expiry price transformation library
 const liveness = argv.liveness ? argv.liveness : 315360000; // ten years in seconds
 
 // Wrap everything in an async function to allow the use of async/await.
