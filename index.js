@@ -14,7 +14,7 @@ const { parseFixed } = require("@ethersproject/bignumber");
 // --syntheticName: long name.
 // --syntheticSymbol: short name.
 // --minSponsorTokens: minimum sponsor position size
-// --libraryAddress: covered call financial product library address
+// --libraryAddress: post expiration financial product library address
 // --liveness: liquidation and withdrawal liveness should be > (expiry timestamp - deploymenet timestamp)
 
 const argv = require("minimist")(process.argv.slice(), {
@@ -29,8 +29,8 @@ if (!argv.minSponsorTokens) throw "--minSponsorTokens required";
 if (!argv.gasprice) throw "--gasprice required (in GWEI)";
 if (typeof argv.gasprice !== "number") throw "--gasprice must be a number";
 if (argv.gasprice < 1 || argv.gasprice > 1000) throw "--gasprice must be between 1 and 1000 (GWEI)";
-const libraryAddress = argv.libraryAddress ? argv.libraryAddress : "0xBbc6009fEfFc27ce705322832Cb2068F8C1e0A58";
-const liveness = argv.liveness ? argv.liveness : 5184000;
+const libraryAddress = argv.libraryAddress ? argv.libraryAddress : "0xreplace";
+const liveness = argv.liveness ? argv.liveness : 315360000; // ten years in seconds
 
 // Wrap everything in an async function to allow the use of async/await.
 (async () => {
