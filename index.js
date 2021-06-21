@@ -87,6 +87,7 @@ const libraryAddress = argv.libraryAddress ? argv.libraryAddress : "0x0000000000
     gas: 12000000, // 12MM is very high. Set this lower if you only have < 2 ETH or so in your wallet.
     gasPrice: argv.gasprice * 1000000000, // gasprice arg * 1 GWEI
     from: account,
+    chainId: await web3.eth.getChainId()
   };
 
   // Simulate transaction to test before sending to the network.
