@@ -98,6 +98,22 @@ const libraryAddress = argv.libraryAddress ? argv.libraryAddress : "0x0000000000
   // Since the simulated transaction succeeded, send the real one to the network.
   const { transactionHash } = await empCreator.methods.createExpiringMultiParty(empParams).send(transactionOptions);
   console.log("Deployed in transaction:", transactionHash);
+  
+  // Print out ABI-encoded constructor params to aid block-explorer verification.
+  const emp = new web3.eth.Contract(
+    getAbi("ExpiringMultiParty"),
+    address
+  );
+  const empConstructorParams = {
+    ...empParams,
+    tokenAddress: await emp.methods.tokenCurrency().call(),
+    finderAddress: await emp.methods.finder().call(),
+    tokenFactoryAddress: getAddress("TokenFactory"),
+    timerAddress: await emp.methods.timerAddress().call()
+  };
+  const encodedParameters = web3.eth.abi.encodeParameters(
+    getAbi("ExpiringMultiParty")[0].inputs, [ empConstructorParams ]);
+  console.log("Encoded EMP Parameters", encodedParameters);
   process.exit(0);
 })().catch((e) => {
   console.error(e);
