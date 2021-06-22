@@ -108,12 +108,17 @@ const libraryAddress = argv.libraryAddress ? argv.libraryAddress : "0x0000000000
     ...empParams,
     tokenAddress: await emp.methods.tokenCurrency().call(),
     finderAddress: await emp.methods.finder().call(),
-    tokenFactoryAddress: getAddress("TokenFactory"),
     timerAddress: await emp.methods.timerAddress().call()
   };
+  // Delete params only needed to pass into EMPCreator.deploy() method that are not included in EMP constructor
+  // params.
+  delete empConstructorParams["syntheticName"];
+  delete empConstructorParams["syntheticSymbol"];
+
   const encodedParameters = web3.eth.abi.encodeParameters(
     getAbi("ExpiringMultiParty")[0].inputs, [ empConstructorParams ]);
-  console.log("Encoded EMP Parameters", encodedParameters);
+  console.log("Encoded EMP Parameters", encodedParameters.slice(2));
+  console.table(empConstructorParams);
   process.exit(0);
 })().catch((e) => {
   console.error(e);
