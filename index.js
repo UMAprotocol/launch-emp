@@ -71,7 +71,7 @@ const libraryAddress = argv.libraryAddress ? argv.libraryAddress : "0x0000000000
     disputeBondPercentage: { rawValue: toWei("0.1") }, // 10% dispute bond.
     sponsorDisputeRewardPercentage: { rawValue: toWei("0.05") }, // 5% reward for sponsors who are disputed invalidly
     disputerDisputeRewardPercentage: { rawValue: toWei("0.2") }, // 20% reward for correct disputes.
-    minSponsorTokens: { rawValue: parseFixed(argv.minSponsorTokens.toString(), decimals) }, // Minimum sponsor position size.
+    minSponsorTokens: { rawValue: parseFixed(argv.minSponsorTokens.toString(), decimals).toString() }, // Minimum sponsor position size.
     liquidationLiveness: 7200, // 2 hour liquidation liveness.
     withdrawalLiveness: 7200, // 2 hour withdrawal liveness.
     financialProductLibraryAddress: libraryAddress, // Default to 0x0 if no address is passed.
@@ -108,12 +108,17 @@ const libraryAddress = argv.libraryAddress ? argv.libraryAddress : "0x0000000000
     ...empParams,
     tokenAddress: await emp.methods.tokenCurrency().call(),
     finderAddress: await emp.methods.finder().call(),
-    tokenFactoryAddress: getAddress("TokenFactory"),
     timerAddress: await emp.methods.timerAddress().call()
   };
+  // Delete params only needed to pass into EMPCreator.deploy() method that are not included in EMP constructor
+  // params.
+  delete empConstructorParams["syntheticName"];
+  delete empConstructorParams["syntheticSymbol"];
+
   const encodedParameters = web3.eth.abi.encodeParameters(
     getAbi("ExpiringMultiParty")[0].inputs, [ empConstructorParams ]);
-  console.log("Encoded EMP Parameters", encodedParameters);
+  console.log("Encoded EMP Parameters", encodedParameters.slice(2));
+  console.table(empConstructorParams);
   process.exit(0);
 })().catch((e) => {
   console.error(e);
