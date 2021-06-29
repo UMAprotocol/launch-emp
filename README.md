@@ -50,6 +50,8 @@ contract is deployed.
 node index.js --gasprice 160 --mnemonic "your mnemonic (12 word seed phrase)" --priceFeedIdentifier UNIUSD --collateralAddress "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984" --expirationTimestamp "1622498400" --syntheticName "UNI 45 Call [31 May 2021]" --syntheticSymbol "UNIc45-0531" --minSponsorTokens "25" --url "your node url"
 ```
 
+After deployment, you will need to go to the covered call financial product library contract address on Etherscan to set the strike price. TODO: Add links and example.
+
 ## Customize the script
 
 The script should be fairly easy to read and understand. It is recommended to keep the default `empParams`
