@@ -86,8 +86,7 @@ const libraryAddress = argv.libraryAddress ? argv.libraryAddress : "0x0000000000
   const transactionOptions = {
     gas: 12000000, // 12MM is very high. Set this lower if you only have < 2 ETH or so in your wallet.
     gasPrice: argv.gasprice * 1000000000, // gasprice arg * 1 GWEI
-    from: account,
-    chainId: await web3.eth.getChainId()
+    from: account
   };
 
   // Simulate transaction to test before sending to the network.
@@ -98,7 +97,7 @@ const libraryAddress = argv.libraryAddress ? argv.libraryAddress : "0x0000000000
   // Since the simulated transaction succeeded, send the real one to the network.
   const { transactionHash } = await empCreator.methods.createExpiringMultiParty(empParams).send(transactionOptions);
   console.log("Deployed in transaction:", transactionHash);
-  
+
   // Print out ABI-encoded constructor params to aid block-explorer verification.
   const emp = new web3.eth.Contract(
     getAbi("ExpiringMultiParty"),
