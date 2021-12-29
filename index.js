@@ -92,7 +92,9 @@ const libraryAddress = argv.libraryAddress ? argv.libraryAddress : "0x0000000000
 
   // Simulate transaction to test before sending to the network.
   console.log("Simulating Deployment...");
-  const address = await empCreator.methods.createExpiringMultiParty(empParams).call(transactionOptions);
+  const simulateTransactionOptions = {...transactionOptions}
+  delete simulateTransactionOptions.chainId
+  const address = await empCreator.methods.createExpiringMultiParty(empParams).call(simulateTransactionOptions);
   console.log("Simulation successful. Expected Address:", address);
 
   // Since the simulated transaction succeeded, send the real one to the network.
